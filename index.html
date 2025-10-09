@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 10</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+
+        /* Attribute Selector */
+        input[type="text"] {
+            border: 2px solid blue;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        input[type="password"] {
+            border: 2px solid green;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* Child Selector */
+        ul > li{
+            color: darkorange;
+            margin: 5px 0;
+        }
+        /* Sibling Selector */
+        h1 + p {
+            font-weight: bold;
+            color: darkred;
+        }
+        /* Pseudo Class */
+        a:hover {
+            color: red;
+            text-decoration: underline;
+        }
+        a:hover::after {
+            content: " (Take Your Cursor Away)";
+            color: green;
+            font-style: italic;
+        }
+        /* Pseudo Class */
+        ul.---- li:nth-child(even) {
+            color: purple;
+            font-weight: bolder;
+            background-color: yellow;
+        }
+
+        /* Not Selector */
+
+        .school div:not(.class2) {
+            background-color: lightblue;
+            padding: 10px;
+            margin: 5px 0;
+            font-weight: bolder;
+        }
+         .school div:not(.class1) {
+            background-color: lightgreen;
+            padding: 10px;
+            margin: 5px 0;
+            font-weight: bolder;
+        }
+
+        /* Pseudo Element */
+        p.p1::first-letter {
+            font-size: 300%;
+            color: orange;
+            font-weight: bolder;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Selectors & Pseudo Class & Pseudo Elements</h1>
+    <input type="text" placeholder="Type something...">
+    <input type="password" placeholder="Password Please...">
+    <ul>
+        <li>Item 1 - Price: $1.99</li>
+        <li>Item 2 - Price: $2.99</li>
+        <li>Item 3 - Price: $3.99</li>
+        <li>Item 4 - Price: $4.99</li>
+        <li>Item 5 - Price: $5.99</li>
+    </ul>
+
+    <h1>Lorem Ipsem</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing e
+        lit. Quisque sit amet accumsan arcu. Proin ac consequat ar
+        cu. Nullam euismod, nisi vel consectetur interdum, nisl ni
+        si aliquet nunc, a facilisis nulla nunc nec nisi.</p>
+    <p>Donec vel sapien augue. Sed at risus neque. Nullam ut mi
+        nisi. Maecenas euismod, justo at facilisis facilisis, est
+        ante convallis nunc, nec lacinia nunc nisl in nunc.</p>
+    
+    <a href="#">Please Hover Over Me</a>
+
+    <ul class="----">
+        <li>🤑 ---- 🤑</li>
+        <li>🤑 ---- 🤑</li>
+        <li>🤑 ---- 🤑</li>
+    </ul>
+
+    <div class="school">
+        <div class="class1">Div 1</div>
+        <div class="class2">Div 2</div>
+    </div>
+
+    <p class="p1">Lorem ipsum dolor sit amet 
+        consectetur adipisicing 
+        elit. Laborum quidem deleniti
+        laudantium omnis neque quasi 
+        expedita, numquam quod vel ad 
+        quaerat cum, natus doloribus 
+        quam reprehenderit aperiam nulla!
+        Exercitationem, placeat!</p>
+</body>
+</html>

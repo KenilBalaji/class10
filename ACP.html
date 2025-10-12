@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam's Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f5f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+            padding: 30px 0 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px #0002;
+        }
+        nav {
+            background: #fff8e1;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 16px 0;
+            box-shadow: 0 2px 8px #0001;
+        }
+        nav a {
+            color: #d2691e;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        nav a:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        .hero {
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 24px #ffb34744;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px #d2691e;
+        }
+        .hero p {
+            font-size: 1.3em;
+            margin-top: 0;
+            text-shadow: 1px 1px 6px #d2691e;
+        }
+        .menu-section {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px #0001;
+            padding: 30px 24px;
+        }
+        .menu-section h2 {
+            color: #d2691e;
+            text-align: center;
+            margin-top: 0;
+        }
+        ul.menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul.menu-list li {
+            color: #d2691e;
+            font-size: 1.1em;
+            margin: 12px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid #ffe0b2;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        ul.menu-list li:hover {
+            background: #fff8e1;
+        }
+        ul.menu-list li:last-child {
+            border-bottom: none;
+        }
+        .school {
+            display: none; /* Hide the old school/class section */
+        }
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .modal {
+            background: #fff;
+            color: #222;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px #ffb34788;
+            padding: 40px 30px;
+            max-width: 350px;
+            width: 90%;
+            position: fixed;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            text-align: center;
+        }
+        .modal h3 {
+            color: #d2691e;
+            margin-top: 0;
+        }
+        .modal ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .modal li {
+            margin-bottom: 10px;
+        }
+        .close-btn {
+            background: #ffb347;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        footer {
+            background: #ffb347;
+            color: #fff;
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 40px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sam's Restaurant</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Menu</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="hero">
+        <h1>Welcome To Sam's Restaurant!</h1>
+        <p>Delicious food, cozy atmosphere, and friendly service. Experience the best dining in town!</p>
+    </div>
+    <section class="menu-section">
+        <h2>Featured Menu</h2>
+        <ul class="menu-list">
+            <li onclick="showChoices('Waffle Bar')"><span>New! - Waffle Bar</span> <span>$7.99</span></li>
+            <li onclick="showChoices('Ice Cream')"><span>Ice Cream</span> <span>$2.99</span></li>
+            <li onclick="showChoices('Snacks')"><span>Snacks</span> <span>$3.99</span></li>
+            <li onclick="showChoices('Drinks')"><span>Drinks</span> <span>$4.99</span></li>
+            <li onclick="showChoices('Meals')"><span>Meals</span> <span>$5.99</span></li>
+        </ul>
+    </section>
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal" id="modal-content">
+            <h3 id="choice-title"></h3>
+            <ul id="choice-list"></ul>
+            <button class="close-btn" onclick="hideChoices()">Close</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Sam's Restaurant. All rights reserved.
+    </footer>
+    <script>
+        const choices = {
+            "Waffle Bar": ["Almond Cocoa Butter", "Triple Choclate", "Belgian Chocolate", "Strawberry Delight", "Classic Maple", "Blueberry Bliss", "Banana Nut", "Cinnamon Swirl", "Peanut Butter Cup", "Cookies and Cream"],
+            "Ice Cream": ["Vanilla", "Chocolate", "Strawberry", "Mint", "Cookie Dough", "Pistachio", "Mango", "Coffee", "Butter Pecan", "Rocky Road", "Neapolitan", "Cookies and Cream"],
+            "Snacks": ["Chips", "Cookies", "Nuts", "Fruits", "Granola Bars", "Popcorn", "Pretzels", "Crackers", "Trail Mix", "Rice Cakes"],
+            "Drinks": ["Coke", "Sprite", "Fanta", "Iced Tea", "Lemonade", "Orange Juice", "Apple Juice", "Grape Juice", "Coffee", "Tea"],
+            "Meals": ["Chicken Sandwich", "Avacado Toast", "Grilled Cheese", "Caesar Salad", "Veggie Wrap", "Turkey Club", "BLT", "Pasta Primavera", "Quinoa Bowl", "Fish Tacos", "Steak Frites", "Veggie Burger", "Chicken Alfredo", "Shrimp Scampi", "BBQ Ribs", "Lobster Roll", "Eggplant Parmesan", "Chicken Parmesan", "Beef Stroganoff", "Mushroom Risotto", "Stuffed Peppers", "Chicken Marsala", "Salmon Fillet", "Pork Chops", "Lamb Chops", "Fried Chicken", "Meatloaf", "Tuna Salad", "Cobb Salad", "Greek Salad", "Caprese Salad"]
+        };
+        function showChoices(item) {
+            document.getElementById('choice-title').textContent = item + " Choices";
+            const list = document.getElementById('choice-list');
+            list.innerHTML = "";
+            (choices[item] || ["No choices available"]).forEach(choice => {
+                const li = document.createElement('li');
+                li.textContent = choice;
+                list.appendChild(li);
+            });
+            document.getElementById('modal-bg').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+        function hideChoices() {
+            document.getElementById('modal-bg').style.display = 'none';
+            document.body.style.overflow = ''; // Restore scroll
+        }
+    </script>
+</body>
+</html>
